@@ -1,47 +1,23 @@
-const OFFLINE_VERSION = 1;
-const CACHE_NAME = "offline";
-const OFFLINE_URL = "index.html";
+const staticLoader = "Loader"
+const assets = [
+  "/",
+  "index.html",
+  "style.css",
+  "192px_icon.png",
+  "512px_icon.png"
+]
 
-self.addEventListener("install", (event) => {
-	event.waitUntil(
-		(async () => {
-			const cache = await caches.open(CACHE_NAME);
-			await cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
-		})()
-	);
-	self.skipWaiting();
-});
-
-self.addEventListener("activate", (event) => {
-	event.waitUntil(
-		(async () => {
-			if ("navigationPreload" in self.registration) {
-				await self.registration.navigationPreload.enable();
-			}
-		})()
-	);
-	self.clients.claim();
-});
-
-self.addEventListener("fetch", (event) => {
-	if (event.request.mode === "navigate") {
-		event.respondWith(
-			(async () => {
-				try {
-					const preloadResponse = await event.preloadResponse;
-					if (preloadResponse) {
-						return preloadResponse;
-					}
-					const networkResponse = await fetch(event.request);
-					return networkResponse;
-				} catch (error) {
-					console.log("Fetch failed; returning offline page instead.", error);
-
-					const cache = await caches.open(CACHE_NAME);
-					const cachedResponse = await cache.match(OFFLINE_URL);
-					return cachedResponse;
-				}
-			})()
-		);
-	}
-});
+self.addEventListener("install", installEvent => {
+	installEvent.waitUntil(
+		caches.open(staticLoader).then(cache => {
+			cache.addAll(assets)
+		})
+	)
+})
+self.addEventListener("fetch", fetchEvent => {
+	fetchEvent.respondWith(
+		caches.match(fetchEvent.request).then(res => {
+			return res || fetch(fetchEvent.request)
+		})
+	)
+})
