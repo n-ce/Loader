@@ -4,13 +4,13 @@
 		"src":"192px_icon.png",
 		"type":"image/png",
 		"sizes":"192x192",
-		"purpose":"maskable"
+		"purpose":"any maskable"
 	},
 	{
 		"src":"512px_icon.png",
 		"type":"image/png",
 		"sizes":"512x512",
-		"purpose":"maskable"
+		"purpose":"any maskable"
 	}
 	],
 	"start_url": "index.html",
