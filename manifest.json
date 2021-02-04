@@ -1,2 +1,15 @@
 {"short_name":"Loader",
-"icons":
+"icons":[
+	{
+		"src":"192px_icon.png",
+		"type":"image/png",
+		"sizes":"192x192"},
+	{
+		"src":"512px_icon.png",
+		"type":"image/png",
+		"sizes":"512x512"
+	}
+	]
+	,"start_url": "/?source=pwa",
+	"display": "standalone"
+}
