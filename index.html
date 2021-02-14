@@ -5,7 +5,6 @@
 <link rel="icon" type="image/png" sizes="512x512" href="512px_icon.png"/>
 <link rel="icon" type="image/png" sizes="192x192" href="192px_icon.png"/>
 <link rel="manifest" href="manifest.json"/>
-<link rel="stylesheet" href="style.css"/>
 </head>
 <style type="text/css" media="all">
 	body{
@@ -28,6 +27,15 @@
 </style>
 <body>
 	<div></div>
-	<script src="register-sw.js"></script>
+	<script>
+		if ("serviceWorker" in navigator) {
+		window.addEventListener("load", function() {
+		navigator.serviceWorker
+		.register("service-worker.js")
+		.then(res => console.log("service worker registered"))
+		.catch(err => console.log("service worker not registered", err))
+		})
+		}
+	</script>
 	</body>
 	</html>
