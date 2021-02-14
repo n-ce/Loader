@@ -7,6 +7,25 @@
 <link rel="manifest" href="manifest.json"/>
 <link rel="stylesheet" href="style.css"/>
 </head>
+<style type="text/css" media="all">
+	body{
+	background-color: black;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	height:97vh;
+	}
+	div{
+	border:6px solid black;
+	border-radius:50%;
+	border-top:6px solid white;
+	width:40px;
+	height:40px;
+	animation:spin 1s linear infinite;}
+	@keyframes spin{
+	0%{transform:rotate(0deg)}
+	100%{transform:rotate(360deg)}}
+</style>
 <body>
 	<div></div>
 	<script src="register-sw.js"></script>

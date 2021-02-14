@@ -2,7 +2,6 @@ const staticLoader = "Loader"
 const assets = [
   "/",
   "index.html",
-  "style.css",
   "192px_icon.png",
   "512px_icon.png"
 ]
